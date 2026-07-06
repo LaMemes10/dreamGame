@@ -14,10 +14,32 @@ background_mode = 2
 sky = SubResource("Sky_rye2q")
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8h54"]
+albedo_color = Color(0, 0.5058824, 0, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_6el2b"]
+material = SubResource("StandardMaterial3D_l8h54")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_552j8"]
 points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnsk1"]
+albedo_color = Color(0.8988624, 0.4781397, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qws4c"]
+albedo_color = Color(0, 0, 0.5647059, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1lh8"]
+albedo_color = Color(0.7921569, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6el2b"]
+albedo_color = Color(0.7921569, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ka1r8"]
+albedo_color = Color(0.7921569, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rl0ii"]
+albedo_color = Color(0.7921569, 0, 0, 1)
 
 [node name="world" type="Node3D" unique_id=900011452]
 
@@ -29,7 +51,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="floor" type="MeshInstance3D" parent="." unique_id=466930305]
-transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 0, 0)
 mesh = SubResource("PlaneMesh_6el2b")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="floor" unique_id=6134834]
@@ -38,4 +60,34 @@ mesh = SubResource("PlaneMesh_6el2b")
 shape = SubResource("ConvexPolygonShape3D_552j8")
 
 [node name="Player" parent="floor" unique_id=1452038489 instance=ExtResource("1_nnsk1")]
-transform = Transform3D(0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0.00050224306, 0.0019160032, -0.030387038)
+transform = Transform3D(0.03999999, 0, 0, 0, 0.03999999, 0, 0, 0, 0.03999999, 0.00050224294, 0.010094713, -0.030387035)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=307066639]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+use_collision = true
+material = SubResource("StandardMaterial3D_nnsk1")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1967926962]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0331874, 0.50010633, -2.5020208)
+use_collision = true
+material = SubResource("StandardMaterial3D_qws4c")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1215987815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.883567, 1.2983398, -0.1081543)
+size = Vector3(1, 3.5966797, 30.70996)
+material = SubResource("StandardMaterial3D_q1lh8")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D3" unique_id=1458991320]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.830704, -0.0745554, -14.947378)
+size = Vector3(1, 3.5966797, 30.70996)
+material = SubResource("StandardMaterial3D_6el2b")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D3/CSGBox3D3" unique_id=380149069]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.830704, -0.0745554, -14.947378)
+size = Vector3(1, 3.5966797, 30.70996)
+material = SubResource("StandardMaterial3D_ka1r8")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGBox3D3/CSGBox3D3/CSGBox3D4" unique_id=218332595]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -14.830704, -0.0745554, -14.947378)
+size = Vector3(1, 3.5966797, 30.70996)
+material = SubResource("StandardMaterial3D_rl0ii")

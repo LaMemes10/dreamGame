@@ -2,15 +2,23 @@
 
 [ext_resource type="Script" uid="uid://dt8xu3rsljrjk" path="res://Player/player.gd" id="1_cyojo"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q1lh8"]
+height = 2.2739258
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q1lh8"]
 
-[node name="Player" type="CharacterBody3D" unique_id=1452038489 node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody3D" unique_id=1452038489]
 script = ExtResource("1_cyojo")
-camera = NodePath("Camera3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=832928386]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_q1lh8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=261329268]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_q1lh8")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1303548182]
+[node name="Head" type="Node3D" parent="." unique_id=1628531975]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=1303548182]
