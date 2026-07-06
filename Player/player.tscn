@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bnk505wxng748"]
 
 [ext_resource type="Script" uid="uid://dt8xu3rsljrjk" path="res://Player/player.gd" id="1_cyojo"]
+[ext_resource type="PackedScene" uid="uid://yn7n6l62veqs" path="res://scenes/ak47.tscn" id="2_4ntmi"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_q1lh8"]
 height = 2.2739258
@@ -22,3 +23,6 @@ shape = SubResource("CapsuleShape3D_q1lh8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1303548182]
+
+[node name="Wep_AK47" parent="Head" unique_id=686137945 instance=ExtResource("2_4ntmi")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.45940602, -0.39218533, -0.47334754)
