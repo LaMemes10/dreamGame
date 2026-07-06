@@ -11,15 +11,27 @@ const BOB_FREQ = 2.0
 const BOB_AMP = 0.08
 var t_bob = 0.0
 
-#fov variables.
+#Fov variables.
 var BASE_FOV = 60
 const FOV_CHANGE = 1.5
 
+#Bullets.
+var bullets = load("res://scenes/bullet.tscn")
+var instance
+
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
+@onready var gun_anim = $Head/Camera3D/Wep_AK47/AnimationPlayer
+@onready var gun_barrel = $Head/Camera3D/Wep_AK47/RayCast3D
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif event.is_action_pressed("shoot"):
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 #Camera movement.
 func _unhandled_input(event):
@@ -68,6 +80,15 @@ func _physics_process(delta: float) -> void:
 	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
 	var target_fov = BASE_FOV + (FOV_CHANGE * velocity_clamped)
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
+
+#Shooting.
+	if Input.is_action_pressed("shoot"):
+		if !gun_anim.is_playing():
+			gun_anim.play("shoot")
+			instance = bullets.instantiate()
+			instance.position = gun_barrel.global_position
+			instance.transform.basis = gun_barrel.global_transform.basis
+			get_tree().root.add_child(instance)
 
 	move_and_slide()
 
