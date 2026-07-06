@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bnk505wxng748"]
 
-[ext_resource type="Script" uid="uid://dt8xu3rsljrjk" path="res://Player/player.gd" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://dt8xu3rsljrjk" path="res://Player/player.gd" id="1_cyojo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q1lh8"]
 
 [node name="Player" type="CharacterBody3D" unique_id=1452038489 node_paths=PackedStringArray("camera")]
-script = ExtResource("1_l8h54")
+script = ExtResource("1_cyojo")
 camera = NodePath("Camera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=261329268]
