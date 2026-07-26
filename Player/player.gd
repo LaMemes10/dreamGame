@@ -37,8 +37,7 @@ func _damage(damage: float) -> void:
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	elif event.is_action_pressed("shoot"):
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		get_tree().change_scene_to_file("res://scenes/mainMenu.tscn")
 
 #Camera movement.
 func _unhandled_input(event):
