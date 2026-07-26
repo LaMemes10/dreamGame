@@ -9,6 +9,30 @@ height = 2.2739258
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q1lh8"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k53q1"]
+bg_color = Color(0.6509804, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btcbx"]
+bg_color = Color(0.652268, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [node name="Player" type="CharacterBody3D" unique_id=1452038489]
 script = ExtResource("1_cyojo")
 
@@ -36,6 +60,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Control" unique_id=2130661078]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 300.0
+offset_bottom = 3.0
+grow_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(30, -30)
+theme_override_colors/font_color = Color(0.652268, 0, 0, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_k53q1")
+theme_override_styles/fill = SubResource("StyleBoxFlat_btcbx")
+step = 1.0
+value = 100.0
 
 [node name="reticle" type="CenterContainer" parent="Control" unique_id=316907651]
 layout_mode = 1

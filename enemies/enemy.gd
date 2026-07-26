@@ -3,7 +3,7 @@ extends CharacterBody3D
 var player = null
 var hp = 100.0
 
-const SPEED = 4.5
+const SPEED = 4.0
 const ATTACK_RANGE = 2.0
 const DAMAGE = 10.0
 
