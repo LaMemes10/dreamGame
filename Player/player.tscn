@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dt8xu3rsljrjk" path="res://Player/player.gd" id="1_cyojo"]
 [ext_resource type="PackedScene" uid="uid://yn7n6l62veqs" path="res://scenes/ak47.tscn" id="2_4ntmi"]
+[ext_resource type="Script" uid="uid://b3ny67g5ary4l" path="res://Player/reticle.gd" id="3_btcbx"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_q1lh8"]
 height = 2.2739258
@@ -26,3 +27,43 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Wep_AK47" parent="Head/Camera3D" unique_id=686137945 instance=ExtResource("2_4ntmi")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.45940602, -0.39218533, -0.47334754)
+
+[node name="Control" type="Control" parent="." unique_id=228681162]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="reticle" type="CenterContainer" parent="Control" unique_id=316907651]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_btcbx")
+
+[node name="top" type="Line2D" parent="Control/reticle" unique_id=1941604205]
+points = PackedVector2Array(0, -5, 0, -15)
+width = 2.0
+
+[node name="left" type="Line2D" parent="Control/reticle" unique_id=1486799350]
+points = PackedVector2Array(-5, 0, -15, 0)
+width = 2.0
+
+[node name="bottom" type="Line2D" parent="Control/reticle" unique_id=1503389855]
+points = PackedVector2Array(0, 5, 0, 15)
+width = 2.0
+
+[node name="right" type="Line2D" parent="Control/reticle" unique_id=2052786079]
+points = PackedVector2Array(5, 0, 15, 0)
+width = 2.0

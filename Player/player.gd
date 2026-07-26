@@ -5,6 +5,7 @@ const WALK_SPEED = 5.0
 const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 4.5
 var mouse_sensitivity := 0.001
+var current_ammo = 30
 
 #Head bob variable.
 const BOB_FREQ = 2.0
@@ -19,6 +20,9 @@ const FOV_CHANGE = 1.5
 var bullets = load("res://scenes/bullet.tscn")
 var instance
 
+@export var max_ammo = 120
+@export var health = 100.0
+
 @onready var head = $Head
 @onready var camera = $Head/Camera3D
 @onready var gun_anim = $Head/Camera3D/Wep_AK47/AnimationPlayer
@@ -26,6 +30,9 @@ var instance
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _damage(damage: float) -> void:
+	health -= damage
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
