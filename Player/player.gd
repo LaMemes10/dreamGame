@@ -49,6 +49,11 @@ func _unhandled_input(event):
 		
 
 func _physics_process(delta: float) -> void:
+
+	#Show properties on debug panel from player.
+	Global.debug.add_property("MovementSpeed", speed, 2)
+	Global.debug.add_property("MouseRotationX", camera.rotation.x, 3); Global.debug.add_property("MouseRotationY", head.rotation.y, 4)
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta

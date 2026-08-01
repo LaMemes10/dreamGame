@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dt8xu3rsljrjk" path="res://Player/player.gd" id="1_cyojo"]
 [ext_resource type="PackedScene" uid="uid://yn7n6l62veqs" path="res://scenes/ak47.tscn" id="2_4ntmi"]
-[ext_resource type="Script" uid="uid://b3ny67g5ary4l" path="res://Player/reticle.gd" id="3_btcbx"]
+[ext_resource type="Script" uid="uid://b3ny67g5ary4l" path="res://scripts/reticle.gd" id="3_btcbx"]
+[ext_resource type="Theme" uid="uid://ctr008efhm4vp" path="res://themes/debug.tres" id="4_k53q1"]
+[ext_resource type="Script" uid="uid://e12lpvg34srd" path="res://scripts/debug.gd" id="5_fhl08"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_q1lh8"]
 height = 2.2739258
@@ -52,7 +54,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 [node name="Wep_AK47" parent="Head/Camera3D" unique_id=686137945 instance=ExtResource("2_4ntmi")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.45940602, -0.39218533, -0.47334754)
 
-[node name="Control" type="Control" parent="." unique_id=228681162]
+[node name="userInterface" type="Control" parent="." unique_id=228681162]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +63,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="Control" unique_id=2130661078]
+[node name="ProgressBar" type="ProgressBar" parent="userInterface" unique_id=2130661078]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -78,7 +80,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_btcbx")
 step = 1.0
 value = 100.0
 
-[node name="reticle" type="CenterContainer" parent="Control" unique_id=316907651]
+[node name="reticle" type="CenterContainer" parent="userInterface" unique_id=316907651 node_paths=PackedStringArray("RETICLE_LINES", "PLAYER_CONTROLLER")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -92,19 +94,38 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_btcbx")
+RETICLE_LINES = [NodePath("top"), NodePath("left"), NodePath("bottom"), NodePath("right")]
+PLAYER_CONTROLLER = NodePath("../..")
 
-[node name="top" type="Line2D" parent="Control/reticle" unique_id=1941604205]
+[node name="top" type="Line2D" parent="userInterface/reticle" unique_id=1941604205]
 points = PackedVector2Array(0, -5, 0, -15)
 width = 2.0
 
-[node name="left" type="Line2D" parent="Control/reticle" unique_id=1486799350]
+[node name="left" type="Line2D" parent="userInterface/reticle" unique_id=1486799350]
 points = PackedVector2Array(-5, 0, -15, 0)
 width = 2.0
 
-[node name="bottom" type="Line2D" parent="Control/reticle" unique_id=1503389855]
+[node name="bottom" type="Line2D" parent="userInterface/reticle" unique_id=1503389855]
 points = PackedVector2Array(0, 5, 0, 15)
 width = 2.0
 
-[node name="right" type="Line2D" parent="Control/reticle" unique_id=2052786079]
+[node name="right" type="Line2D" parent="userInterface/reticle" unique_id=2052786079]
 points = PackedVector2Array(5, 0, 15, 0)
 width = 2.0
+
+[node name="debugPanel" type="PanelContainer" parent="userInterface" unique_id=580637842]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 50.0
+theme = ExtResource("4_k53q1")
+script = ExtResource("5_fhl08")
+
+[node name="MarginContainer" type="MarginContainer" parent="userInterface/debugPanel" unique_id=446073629]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="userInterface/debugPanel/MarginContainer" unique_id=143662269]
+unique_name_in_owner = true
+layout_mode = 2
