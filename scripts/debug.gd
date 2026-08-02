@@ -10,7 +10,7 @@ func _ready():
 	Global.debug = self
 	visible = false
 
-func _input(event):
+func _input(event):	
 	#Toggle debug menu.
 	if event.is_action_pressed("debug"):
 		visible = !visible
@@ -19,8 +19,9 @@ func _input(event):
 func _process(delta: float) -> void:
 	if visible: 
 		#Use delta time to get approximately frames per second and round to two decimal places. !DisableVSync uf fps is stuck at 60!
-		frames_per_second = "%.2f" % (1.0/delta) #Gets frames per second every frame.
+		frames_per_second = "%.2f" % Engine.get_frames_per_second() #Gets frames per second every frame.
 		add_property("FPS", frames_per_second, 1)
+		#add_property("MovementSpeed", speed, 5)
 
 func add_property(title : String, value, order):
 	var target

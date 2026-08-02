@@ -6,10 +6,96 @@
 [ext_resource type="Theme" uid="uid://ctr008efhm4vp" path="res://themes/debug.tres" id="4_k53q1"]
 [ext_resource type="Script" uid="uid://e12lpvg34srd" path="res://scripts/debug.gd" id="5_fhl08"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_qws4c"]
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_q1lh8"]
 height = 2.2739258
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q1lh8"]
+
+[sub_resource type="Animation" id="Animation_k53q1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:shape:height")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fhl08"]
+resource_name = "crouch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape3D:shape:height")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0, 1.5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape3D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1, 0), Vector3(0, 0.75, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Head:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5, 0), Vector3(0, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vtle1"]
+_data = {
+&"RESET": SubResource("Animation_k53q1"),
+&"crouch": SubResource("Animation_fhl08")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k53q1"]
 bg_color = Color(0.6509804, 0, 0, 0)
@@ -35,11 +121,20 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="Player" type="CharacterBody3D" unique_id=1452038489]
+[node name="Player" type="CharacterBody3D" unique_id=1452038489 node_paths=PackedStringArray("animation_player", "crouch_shapecast")]
 script = ExtResource("1_cyojo")
+animation_player = NodePath("AnimationPlayer")
+crouch_shapecast = NodePath("ShapeCast3D")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=1038813889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("SphereShape3D_qws4c")
+target_position = Vector3(0, 0.5, 0)
+debug_shape_custom_color = Color(0, 1, 0, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=832928386]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_q1lh8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=261329268]
@@ -51,8 +146,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1303548182]
 
-[node name="Wep_AK47" parent="Head/Camera3D" unique_id=686137945 instance=ExtResource("2_4ntmi")]
+[node name="Wep_AK47" parent="Head" unique_id=686137945 instance=ExtResource("2_4ntmi")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.45940602, -0.39218533, -0.47334754)
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1087154656]
+libraries/ = SubResource("AnimationLibrary_vtle1")
 
 [node name="userInterface" type="Control" parent="." unique_id=228681162]
 layout_mode = 3
@@ -129,3 +228,5 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="userInterface/debugPanel/MarginContainer" unique_id=143662269]
 unique_name_in_owner = true
 layout_mode = 2
+
+[connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]

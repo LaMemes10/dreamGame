@@ -47,6 +47,12 @@ material = SubResource("StandardMaterial3D_l8h54")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_552j8"]
 points = PackedVector3Array(-1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3c7e1"]
+albedo_color = Color(1, 0.14901961, 0.9372549, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2uph"]
+albedo_color = Color(0.75686276, 0.89411765, 0.13725491, 1)
+
 [node name="world" type="Node3D" unique_id=900011452]
 
 [node name="Player" parent="." unique_id=1452038489 instance=ExtResource("1_nnsk1")]
@@ -105,3 +111,15 @@ mesh = SubResource("PlaneMesh_6el2b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/floor/StaticBody3D" unique_id=968130497]
 shape = SubResource("ConvexPolygonShape3D_552j8")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1714677572]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.287, 1.25, 0)
+use_collision = true
+size = Vector3(6, 0.5, 4)
+material = SubResource("StandardMaterial3D_3c7e1")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1855756623]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.287, 1, 6.16)
+use_collision = true
+size = Vector3(6, 0.5, 4)
+material = SubResource("StandardMaterial3D_q2uph")
