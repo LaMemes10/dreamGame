@@ -146,9 +146,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=1303548182]
 
-[node name="Wep_AK47" parent="Head" unique_id=686137945 instance=ExtResource("2_4ntmi")]
+[node name="Wep_AK47" parent="Head/Camera3D" unique_id=686137945 instance=ExtResource("2_4ntmi")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.45940602, -0.39218533, -0.47334754)
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1087154656]
 libraries/ = SubResource("AnimationLibrary_vtle1")
@@ -228,5 +227,11 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="userInterface/debugPanel/MarginContainer" unique_id=143662269]
 unique_name_in_owner = true
 layout_mode = 2
+
+[node name="PlayerStateMachine" type="Node" parent="." unique_id=1079084804]
+
+[node name="IdlePlayerState" type="Node" parent="PlayerStateMachine" unique_id=1031326751]
+
+[node name="WalkingPlayerState" type="Node" parent="PlayerStateMachine" unique_id=204645354]
 
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_player_animation_started"]
