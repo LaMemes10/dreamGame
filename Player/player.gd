@@ -37,6 +37,9 @@ var instance
 @onready var gun_barrel = $Head/Camera3D/Wep_AK47/RayCast3D
 
 func _ready() -> void:
+	
+	Global.player = self
+	
 	#Get mouse input.
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
@@ -103,8 +106,8 @@ func _physics_process(delta: float) -> void:
 			velocity.x = direction.x * speed
 			velocity.z = direction.z * speed
 		else:
-			velocity.x = lerp(velocity.x, 0.0, delta * 7.0)
-			velocity.z = lerp(velocity.z, 0.0, delta * 7.0)
+			velocity.x = move_toward(velocity.x, 0.0, 40.0 * delta)#lerp(velocity.x, 0.0, delta * 40.0)
+			velocity.z = move_toward(velocity.z, 0.0, 40.0 * delta)#lerp(velocity.z, 0.0, delta * 40.0)
 	else:
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * 3.0)
 		velocity.z = lerp(velocity.z, direction.z * speed, delta * 3.0)
